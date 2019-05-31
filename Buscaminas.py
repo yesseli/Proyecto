@@ -196,6 +196,55 @@ def prepareWindow():
 #ACA USAMOS UNA FUNCION PARA LA PREPARACION DE UN BOTON DE REINICIAR USANDO LA LIBRERIA DE TK QUE REINICIARA EL JUEGO DESDE 0 Y RECLOCANDO TANTO COMO FILAS COLUMNAS Y LAS MINAS
 
 
+def onRightClick(x,y):
+    global buttons
+    if gameover:
+        return
+    if buttons[x][y]["text"] == "?":
+        buttons[x][y]["text"] = " "
+        buttons[x][y]["state"] = "normal"
+    elif buttons[x][y]["text"] == " " and buttons[x][y]["state"] == "normal":
+        buttons[x][y]["text"] = "?"
+        buttons[x][y]["state"] = "disabled"
+#.......................................................................................................................
+#DEFINIMOS UNA FUNCION para el click derecho en x & y USAMOS  GLOBAL 
+#para la lista de BOTONES 
+
+#USAMOS  if en el bool de gameover: USAMOS if en la lista de Buttons que al 
+#clickear alguna de las casillas se coloque un texto,  si esta se vuelve a clickear 
+#quitara el texto y lo colocara normal, usamos else if para que al clickear en las 
+#casillas en blanco colocar el texto y desabilitar la casilla con el texto
+
+def autoClickOn(x,y):
+    global field, buttons, colores, rows, cols
+    if buttons[x][y]["state"] == "disabled":
+        return
+    if field[x][y] != 0:
+        buttons[x][y]["text"] = str(field[x][y])
+    else:
+        buttons[x][y]["text"] = " "
+    buttons[x][y].config(disabledforeground=colores[field[x][y]])
+    buttons[x][y].config(relief=tkinter.SUNKEN)
+    buttons[x][y]['state'] = 'disabled'
+    if field[x][y] == 0:
+        if x != 0 and y != 0:
+            autoClickOn(x-1,y-1)
+        if x != 0:
+            autoClickOn(x-1,y)
+        if x != 0 and y != cols-1:
+            autoClickOn(x-1,y+1)
+        if y != 0:
+            autoClickOn(x,y-1)
+        if y != cols-1:
+            autoClickOn(x,y+1)
+        if x != rows-1 and y != 0:
+            autoClickOn(x+1,y-1)
+        if x != rows-1:
+            autoClickOn(x+1,y)
+        if x != rows-1 and y != cols-1:
+            autoClickOn(x+1,y+1)
+
+
 
 
 
