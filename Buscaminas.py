@@ -128,6 +128,59 @@ def loadConfig():
 #DEFINIMOS UNA FUNCION LLAMADA loadconfig, PARA CARGAR LA CONFIGURACION GURDADA
 #UTILIZAMOS for in range PARA CARGAR Y POSICIONAR LAS MINAS COLUMNAS Y FILAS Y DISTRIBUIR ESTAS POR TODA LA TABLA
 
+def prepareGame():
+    global rows, cols, mines, field
+    field = []
+    for x in range(0, rows):
+        field.append([])
+        for y in range(0, cols):
+            # agregar botón y valor de inicio para el juego
+            field[x].append(0)
+    #generar minas
+    for _ in range(0, mines):
+        x = random.randint(0, rows-1)
+        y = random.randint(0, cols-1)
+        # Evitar que las minas se sobre pongan
+        while field[x][y] == -1:
+            x = random.randint(0, rows-1)
+            y = random.randint(0, cols-1)
+        field[x][y] = -1
+        if x != 0:
+            if y != 0:
+                if field[x-1][y-1] != -1:
+                    field[x-1][y-1] = int(field[x-1][y-1]) + 1
+            if field[x-1][y] != -1:
+                field[x-1][y] = int(field[x-1][y]) + 1
+            if y != cols-1:
+                if field[x-1][y+1] != -1:
+                    field[x-1][y+1] = int(field[x-1][y+1]) + 1
+        if y != 0:
+            if field[x][y-1] != -1:
+                field[x][y-1] = int(field[x][y-1]) + 1
+        if y != cols-1:
+            if field[x][y+1] != -1:
+                field[x][y+1] = int(field[x][y+1]) + 1
+        if x != rows-1:
+            if y != 0:
+                if field[x+1][y-1] != -1:
+                    field[x+1][y-1] = int(field[x+1][y-1]) + 1
+            if field[x+1][y] != -1:
+                field[x+1][y] = int(field[x+1][y]) + 1
+            if y != cols-1:
+                if field[x+1][y+1] != -1:
+                    field[x+1][y+1] = int(field[x+1][y+1]) + 1
+#..................................................................................................
+#DEFINIMOS UNA FUNCION DE PREPARACION DE JUEGO
+#USAMOS EL CAMPO LLAMADO FIELD 
+#USAMOS fori x in range PARA LAS FILAS 
+#UTILIZAMOS field.append para agreagar un objeto a la lista
+#USAMOS for y in range PARA DAR UN BOTON Y VALOR DE INICIO PARA EL JUEGO EN LAS COLUMNAS
+
+#UTILIZAMOS for _ in range PARA ESTABLECER UN RANGO ENTRE LAS VARIABLES X / Y PARA COLOCAR LAS MINAS ENTRE ESTAS DE FORMA ALEATORA x = random.randint(0, rows-1) ,  y = random.randint(0, cols-1)
+
+#UTILIZAMOS DENUEVO EL CAMPO DE field Y UN BUCLE DE WHILE PARA EVITAR QUE LAS MINAS PUESTAS ALEATOREAS NO SE SOBREPONGAN UNAS CON OTRAS PARA ELLO UTILIZAMOS LAS CONDICION DE IF
+
+
 
 
 
