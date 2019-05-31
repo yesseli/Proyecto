@@ -58,5 +58,28 @@ def createMenu():
 
 
 
+def setCustomSize():
+    global customsizes
+    r = tkinter.simpledialog.askinteger("Personalizar Tamaño", "Ingrese la cantidad de filas")
+    c = tkinter.simpledialog.askinteger("Personalizar Tamaño", "Ingrese la cantidad de columnas")
+    m = tkinter.simpledialog.askinteger("Personalizar Tamaño", "Ingrese la cantidad de minas")
+    while m > r*c:
+        m = tkinter.simpledialog.askinteger("Personalizar Tamaño", "El máximo de minas para esta dimensión es: " + str(r*c) + "\nIngrese la cantidad de minas")
+    customsizes.insert(0, (r,c,m))
+    customsizes = customsizes[0:5]
+    setSize(r,c,m)
+    createMenu()
+
+#DEFINIMOS UNA FUNCION LLAMADA customSize , AGREGAMOS LA VARIABLE customsizes EN UNA FUNCION GLOBAL PARA QUE ESTA SE PUEDA ACCEDER DESDE CUALQUIER PARTE DEL PROGRAMA
+
+#DEFINIMOS UNA LA VARIABLE (R) PARA LAS FILAS QUE QUIERA INGRESAR EL USUARIO
+
+#DEFINIMOS UNA LA VARIABLE (C) PARA LAS COLUMNAS QUE QUIERA INGRESAR EL USUARIO
+
+#DEFINIMOS UNA LA VARIABLE (M) PARA LAS MINAS QUE QUIERA INGRESAR EL USUARIO  ESTO SIEMPRE CON LOS TERMINOS DE TKINTER DE DIALGOS SIMPRES DE NUESTRA LIBRERIA
+
+#USAMOS UN BUCLE DE WHILE QUE DESCRIBE QUE SI LA CANTIDAD DE MINAS ES MAYOR QUE LA CANTIDAD DE FILAS * COLUMNAS 
+#NOS MOSTRARA UN DIALOGO DE RESTIRCCION DE  COLUMNAS Y NOS PEDIRA INGRESAR DENUEVO UN NUMERO CORRECTO
+
 
 
