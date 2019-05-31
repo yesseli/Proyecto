@@ -180,6 +180,21 @@ def prepareGame():
 
 #UTILIZAMOS DENUEVO EL CAMPO DE field Y UN BUCLE DE WHILE PARA EVITAR QUE LAS MINAS PUESTAS ALEATOREAS NO SE SOBREPONGAN UNAS CON OTRAS PARA ELLO UTILIZAMOS LAS CONDICION DE IF
 
+def prepareWindow():
+    global rows, cols, buttons
+    tkinter.Button(window, text="Reiniciar", command=restartGame).grid(row=0, column=0, columnspan=cols, sticky=tkinter.N+tkinter.W+tkinter.S+tkinter.E)
+    buttons = []
+    for x in range(0, rows):
+        buttons.append([])
+        for y in range(0, cols):
+            b = tkinter.Button(window, text=" ", width=2, command=lambda x=x,y=y: clickOn(x,y))
+            b.bind("<Button-3>", lambda e, x=x, y=y:onRightClick(x, y))
+            b.grid(row=x+1, column=y, sticky=tkinter.N+tkinter.W+tkinter.S+tkinter.E)
+            buttons[x].append(b)
+#............................................................................................................
+
+#ACA USAMOS UNA FUNCION PARA LA PREPARACION DE UN BOTON DE REINICIAR USANDO LA LIBRERIA DE TK QUE REINICIARA EL JUEGO DESDE 0 Y RECLOCANDO TANTO COMO FILAS COLUMNAS Y LAS MINAS
+
 
 
 
