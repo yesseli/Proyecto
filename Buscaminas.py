@@ -244,6 +244,37 @@ def autoClickOn(x,y):
         if x != rows-1 and y != cols-1:
             autoClickOn(x+1,y+1)
 
+def clickOn(x,y):
+    global field, buttons, colores, gameover, rows, cols
+    if gameover:
+        return
+    buttons[x][y]["text"] = str(field[x][y])
+    if field[x][y] == -1:
+        buttons[x][y]["text"] = "?"
+        buttons[x][y].config(background='green', disabledforeground='black')
+        gameover = True
+        tkinter.messagebox.showinfo("Game Over", "Has PERDIDO.")
+        #ahora mostramos todas las otras minas
+        for _x in range(0, rows):
+            for _y in range(cols):
+                if field[_x][_y] == -1:
+                    buttons[_x][_y]["text"] = "?"
+    else:
+        buttons[x][y].config(disabledforeground=colores[field[x][y]])
+    if field[x][y] == 0:
+        buttons[x][y]["text"] = " "
+        #Repite todos los botones que están cerca.
+        autoClickOn(x,y)
+    buttons[x][y]['state'] = 'disabled'
+    buttons[x][y].config(relief=tkinter.SUNKEN)
+    checkWin()
+.........................................................................................................
+#DEFINIMOS UNA FUNCION para los clicks USAMOS LAS VARIABLES 
+GLOBALES, Agregamos una condicion de if field DONDE  SI EL RESULTADO DE LAS VARIABLES X & Y SON IGUAL A -1 ESTA COLOCARA UN TEXTO LE DARA UN COLOR DE FONDO Y DE FUENTE
+
+#SI EL BOOL DE gameover es verdadero NOS MOSTRARA UNA CAJA DE TEXTO CON IFNORMACION DE QUE EL JUEGO SE ACABO Y HEMOS PERDIDO 
+
+#APLICAMOS LA CONDICION DE if field DENUEVO PARA QUE CUANDO CLICKIEMOS UNA CASILLA CORRECTA Y LAS DEMAS ESTEN VACIAS O SU VALOR SEA 0 REPETIRA TODOS LOS BOTONES QUE ESTAN CERCA Y  INABILITARA 
 
 
 
