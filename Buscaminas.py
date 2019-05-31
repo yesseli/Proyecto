@@ -114,6 +114,20 @@ def saveConfig():
 #DEFINIMOS UNA FUNCION DE savaConfig, Usamos las variables globales rows, cols y mines PARA CONFIGURAR QUE AL MOMENTO DE ABRIR DENUEVO LA APLICACION NOS MUESTRE EL TAMAÑO ANTERIOR AL QUE HABIAMOS ELEJIDO
 #PARA ESTO SE ES NECESARIO UTILIZAR EL MODUL DE CONFIGPANSER
 
+def loadConfig():
+    global rows, cols, mines, customsizes
+    config = configparser.SafeConfigParser()
+    config.read("config.ini")
+    rows = config.getint("game", "rows")
+    cols = config.getint("game", "cols")
+    mines = config.getint("game", "mines")
+    amountofsizes = config.getint("sizes", "amount")
+    for x in range(0, amountofsizes):
+        customsizes.append((config.getint("sizes", "row"+str(x)), config.getint("sizes", "cols"+str(x)), config.getint("sizes", "mines"+str(x))))
+#...................................................................................................................................
+#DEFINIMOS UNA FUNCION LLAMADA loadconfig, PARA CARGAR LA CONFIGURACION GURDADA
+#UTILIZAMOS for in range PARA CARGAR Y POSICIONAR LAS MINAS COLUMNAS Y FILAS Y DISTRIBUIR ESTAS POR TODA LA TABLA
+
 
 
 
