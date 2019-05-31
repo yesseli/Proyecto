@@ -268,14 +268,49 @@ def clickOn(x,y):
     buttons[x][y]['state'] = 'disabled'
     buttons[x][y].config(relief=tkinter.SUNKEN)
     checkWin()
-.........................................................................................................
+#.........................................................................................................
 #DEFINIMOS UNA FUNCION para los clicks USAMOS LAS VARIABLES 
-GLOBALES, Agregamos una condicion de if field DONDE  SI EL RESULTADO DE LAS VARIABLES X & Y SON IGUAL A -1 ESTA COLOCARA UN TEXTO LE DARA UN COLOR DE FONDO Y DE FUENTE
+#GLOBALES, Agregamos una condicion de if field DONDE  SI EL RESULTADO DE LAS VARIABLES X & Y SON IGUAL A -1 ESTA COLOCARA UN TEXTO LE DARA UN COLOR DE FONDO Y DE FUENTE
 
 #SI EL BOOL DE gameover es verdadero NOS MOSTRARA UNA CAJA DE TEXTO CON IFNORMACION DE QUE EL JUEGO SE ACABO Y HEMOS PERDIDO 
 
 #APLICAMOS LA CONDICION DE if field DENUEVO PARA QUE CUANDO CLICKIEMOS UNA CASILLA CORRECTA Y LAS DEMAS ESTEN VACIAS O SU VALOR SEA 0 REPETIRA TODOS LOS BOTONES QUE ESTAN CERCA Y  INABILITARA 
+def checkWin():
+    global buttons, field, rows, cols
+    win = True
+    for x in range(0, rows):
+        for y in range(0, cols):
+            if field[x][y] != -1 and buttons[x][y]["state"] == "normal":
+                win = False
+    if win:
+        tkinter.messagebox.showinfo("Gave Over", "HAS GANADO")
 
+if os.path.exists("config.ini"):
+    loadConfig()
+else:
+    saveConfig()
+
+createMenu()
+
+prepareWindow()
+prepareGame()
+window.mainloop()
+#..........................................................................................................
+#DEFINIMOS UNA FUNCION DE checkeo DE VICOTORIA 
+#USAMOS LAS VARIABLES Y LISTAS GLOBALES
+#USAMOS LA VARIABLE WIN como verdadera 
+
+#USAMOS for in x / y range para DAR UNA CONDICION QUE AL MOMENTO DE QUE UN BOTON O UNA CASILLA TENGA EL VALOR DE UNA MINA NUESTRA VARIABLE WIN sea falsa
+
+#AGREGAMOS LA CONDICION if win PARA Q CUANDO win sea verdadera NOS MUESTRE UNA CAJA DE TEXTO DE INFORMACION DE  QUE EL JUEGO TERMINO Y HEMOS GANADO
+
+#AGREGAMOS OTRA CONDICION DE os para CARGAR UNA CONFIGURACION O DE LO CONTRARIO SALVAR LA CONFIGURACION DE NUESTRO JUEGO
+
+# CERRAMOS LAS FUNCIONES 
+createMenu()
+prepareWindow()
+prepareGame()
+window.mainloop()
 
 
 
