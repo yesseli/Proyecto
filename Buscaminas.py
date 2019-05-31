@@ -83,3 +83,38 @@ def setCustomSize():
 
 
 
+#establecemos los tamaños para cada fila, columna o mina y las agregamos a una funcion global
+
+def setSize(r,c,m):
+    global rows, cols, mines
+    rows = r
+    cols = c
+    mines = m
+    saveConfig()
+    restartGame()
+#....................................................................................................
+def saveConfig():
+    global rows, cols, mines
+    #Configuracion
+    config = configparser.SafeConfigParser()
+    config.add_section("game")
+    config.set("game", "rows", str(rows))
+    config.set("game", "cols", str(cols))
+    config.set("game", "mines", str(mines))
+    config.add_section("sizes")
+    config.set("sizes", "amount", str(min(5,len(customsizes))))
+    for x in range(0,min(5,len(customsizes))):
+        config.set("sizes", "row"+str(x), str(customsizes[x][0]))
+        config.set("sizes", "cols"+str(x), str(customsizes[x][1]))
+        config.set("sizes", "mines"+str(x), str(customsizes[x][2]))
+
+    with open("config.ini", "w") as file:
+        config.write(file)
+
+#DEFINIMOS UNA FUNCION DE savaConfig, Usamos las variables globales rows, cols y mines PARA CONFIGURAR QUE AL MOMENTO DE ABRIR DENUEVO LA APLICACION NOS MUESTRE EL TAMAÑO ANTERIOR AL QUE HABIAMOS ELEJIDO
+#PARA ESTO SE ES NECESARIO UTILIZAR EL MODUL DE CONFIGPANSER
+
+
+
+
+
