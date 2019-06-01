@@ -195,6 +195,16 @@ def prepareWindow():
 
 #ACA USAMOS UNA FUNCION PARA LA PREPARACION DE UN BOTON DE REINICIAR USANDO LA LIBRERIA DE TK QUE REINICIARA EL JUEGO DESDE 0 Y RECLOCANDO TANTO COMO FILAS COLUMNAS Y LAS MINAS
 
+def restartGame():
+    global gameover
+    gameover = False
+
+    for x in window.winfo_children():
+        if type(x) != tkinter.Menu:
+            x.destroy()
+    prepareWindow()
+    prepareGame()
+
 
 def onRightClick(x,y):
     global buttons
@@ -307,10 +317,7 @@ window.mainloop()
 #AGREGAMOS OTRA CONDICION DE os para CARGAR UNA CONFIGURACION O DE LO CONTRARIO SALVAR LA CONFIGURACION DE NUESTRO JUEGO
 
 # CERRAMOS LAS FUNCIONES 
-createMenu()
-prepareWindow()
-prepareGame()
-window.mainloop()
+
 
 
 
